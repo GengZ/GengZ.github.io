@@ -215,15 +215,15 @@
                 <blockquote>
 <p><a href="http://kaijun.rocks/hexo-theme-huxblog/" target="_blank" rel="noopener">from</a></p>
 </blockquote>
-<h3><span id="ndarray">ndarray</span></h3>
+<h3 id="ndarray">ndarray</h3>
 <hr>
-<h5><span id="basic-operation">basic operation</span></h5>
+<h5 id="basic-operation">basic operation</h5>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> *</span><br><span class="line">a = arange(<span class="number">15</span>).reshape(<span class="number">3</span>, <span class="number">5</span>)</span><br><span class="line">b = array([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], [<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]])</span><br><span class="line">a.shape		<span class="comment"># (3, 5)</span></span><br><span class="line">a.size</span><br><span class="line">a.max(axis=?)</span><br><span class="line">a.mean(axis=?)</span><br><span class="line"><span class="comment"># use ravel to replace flatten</span></span><br><span class="line">a.ravel()</span><br><span class="line">a.T			<span class="comment"># transpose</span></span><br><span class="line">a.astype(_)		<span class="comment"># _:	np.float, np.int, np.uint8</span></span><br><span class="line">a.dtype.name</span><br></pre></td></tr></table></figure>
-<h5><span id="creation">creation</span></h5>
+<h5 id="creation">creation</h5>
 <blockquote>
 <p>arange, random.rand, random.randint, linspace, ones, zeros, empty, logspace</p>
 </blockquote>
-<h5><span id="slice">slice</span></h5>
+<h5 id="slice">slice</h5>
 <ul>
 <li>
 <p>a[…, i]</p>
@@ -238,7 +238,7 @@
 <p>split a at certain index</p>
 </li>
 </ul>
-<h5><span id="concat">concat</span></h5>
+<h5 id="concat">concat</h5>
 <ul>
 <li>np.vstack(a, b)</li>
 <li>np.hstack(a, b)</li>
@@ -247,7 +247,7 @@
 <li>np.fliplr()</li>
 <li>np.flipud()</li>
 </ul>
-<h5><span id="basic-math-operation">basic math operation</span></h5>
+<h5 id="basic-math-operation">basic math operation</h5>
 <ul>
 <li>
 <p>np.dot</p>
@@ -258,9 +258,9 @@
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> *</span><br><span class="line">a = ndarray</span><br><span class="line">b = ndarray 	<span class="comment"># same size as a</span></span><br><span class="line">a ** b</span><br></pre></td></tr></table></figure>
-<h5><span id="random">random</span></h5>
+<h5 id="random">random</h5>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> python.random <span class="keyword">as</span> random</span><br><span class="line"></span><br><span class="line">random.seed(CERTAIN_NUMBER)</span><br><span class="line">random.random(SHAPE)</span><br><span class="line">random.randint(LOWER, HIGHER, NUMBER)</span><br><span class="line"></span><br><span class="line">b = random.permutation(a)</span><br><span class="line">random.shuffle(a)		<span class="comment"># in-place</span></span><br></pre></td></tr></table></figure>
-<h5><span id="useful">useful</span></h5>
+<h5 id="useful">useful</h5>
 <ul>
 <li>operation on mask ndarray</li>
 </ul>
@@ -304,7 +304,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text"><span id="ndarray">ndarray</span></span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.0.1.</span> <span class="toc-nav-text"><span id="basic-operation">basic operation</span></span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.0.2.</span> <span class="toc-nav-text"><span id="creation">creation</span></span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.0.3.</span> <span class="toc-nav-text"><span id="slice">slice</span></span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.0.4.</span> <span class="toc-nav-text"><span id="concat">concat</span></span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.0.5.</span> <span class="toc-nav-text"><span id="basic-math-operation">basic math operation</span></span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.0.6.</span> <span class="toc-nav-text"><span id="random">random</span></span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.0.7.</span> <span class="toc-nav-text"><span id="useful">useful</span></span></a></li></ol></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#ndarray"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">ndarray</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#basic-operation"><span class="toc-nav-number">1.0.1.</span> <span class="toc-nav-text">basic operation</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#creation"><span class="toc-nav-number">1.0.2.</span> <span class="toc-nav-text">creation</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#slice"><span class="toc-nav-number">1.0.3.</span> <span class="toc-nav-text">slice</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#concat"><span class="toc-nav-number">1.0.4.</span> <span class="toc-nav-text">concat</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#basic-math-operation"><span class="toc-nav-number">1.0.5.</span> <span class="toc-nav-text">basic math operation</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#random"><span class="toc-nav-number">1.0.6.</span> <span class="toc-nav-text">random</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#useful"><span class="toc-nav-number">1.0.7.</span> <span class="toc-nav-text">useful</span></a></li></ol></li></ol></li></ol>
         
         </div>
       </aside>
@@ -554,7 +554,7 @@
 
 
 
-	<a id="rocket" href="#top" class=""></a>
+	<!-- <a id="rocket" href="#top" class=""></a> -->
 	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
     <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
 <!-- Image to hack wechat -->
