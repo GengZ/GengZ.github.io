@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          [Python] Numpy manual - Geng Zhan
+          [MXNet] MXNet Notes I: Custom DataIter - Geng Zhan
         
     </title>
 
-    <link rel="canonical" href="http://yoursite-url/2017/12/11/numpy-manual/">
+    <link rel="canonical" href="http://yoursite-url/2017/12/16/mxnet-notes1/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -86,16 +86,16 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#Python" title="Python">Python</a>
+                              <a class="tag" href="/tags/#MXNet" title="MXNet">MXNet</a>
                             
-                              <a class="tag" href="/tags/#ML" title="ML">ML</a>
+                              <a class="tag" href="/tags/#Notes" title="Notes">Notes</a>
                             
                         </div>
-                        <h1>[Python] Numpy manual</h1>
-                        <h2 class="subheading">Numpy revise</h2>
+                        <h1>[MXNet] MXNet Notes I: Custom DataIter</h1>
+                        <h2 class="subheading">Mainly focus on Custom DataIter in this section.</h2>
                         <span class="meta">
                             Posted by Geng Zhan on
-                            2017-12-11
+                            2017-12-16
                         </span>
                     </div>
                 
@@ -213,58 +213,18 @@
                 post-container">
 
                 <blockquote>
-<p><a href="http://kaijun.rocks/hexo-theme-huxblog/" target="_blank" rel="noopener">from</a></p>
+<p><a href="https://mxnet.incubator.apache.org/tutorials/basic/data.html#custom-iterator" target="_blank" rel="noopener">Custom Iter Tutorial</a>: introduction about custom iter; method must be overwritten in custom iter.</p>
+<p><a href="https://mxnet.incubator.apache.org/api/python/io.html#mxnet.io.DataBatch" target="_blank" rel="noopener">DataBatch</a>: cast light on <strong>provide_data</strong> and <strong>provide_label</strong> <em>attributes</em> of the custom data iter.</p>
 </blockquote>
-<h3 id="ndarray">ndarray</h3>
-<hr>
-<h5 id="basic-operation">basic operation</h5>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> *</span><br><span class="line">a = arange(<span class="number">15</span>).reshape(<span class="number">3</span>, <span class="number">5</span>)</span><br><span class="line">b = array([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], [<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]])</span><br><span class="line">a.shape		<span class="comment"># (3, 5)</span></span><br><span class="line">a.size</span><br><span class="line">a.max(axis=?)</span><br><span class="line">a.mean(axis=?)</span><br><span class="line"><span class="comment"># use ravel to replace flatten</span></span><br><span class="line">a.ravel()</span><br><span class="line">a.T			<span class="comment"># transpose</span></span><br><span class="line">a.astype(_)		<span class="comment"># _:	np.float, np.int, np.uint8</span></span><br><span class="line">a.dtype.name</span><br></pre></td></tr></table></figure>
-<h5 id="creation">creation</h5>
+<p>give a toy example of DataIter, notes as comments also are included in it.</p>
+<p>Just a manually copy of <strong>@Custom Iter Tutorial</strong> with several comments for better understanding. So that avoid switching between the tutorial and databatch pages.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DemoIter</span><span class="params">(mx.io.DataIter)</span>:</span></span><br><span class="line">    self.__init__(self, data_names, data_shapes, data_gen, </span><br><span class="line">                  label_names, label_shapes, label_gen,</span><br><span class="line">                  num_batches = <span class="number">10</span>):</span><br><span class="line">        self._provide_data = zip(data_names, data_shapes)	<span class="comment"># fixed and must-have</span></span><br><span class="line">        self._provide_label = zip(label_names, label_shapes) <span class="comment"># fixed and must-have</span></span><br><span class="line">        self.num_batches = num_batches	<span class="comment"># total batches in this training procedure</span></span><br><span class="line">        self.data_gen = data_gen	<span class="comment"># ?</span></span><br><span class="line">        						<span class="comment"># method for generating data</span></span><br><span class="line">        self.label_gen = label_gen	<span class="comment"># ?</span></span><br><span class="line">        self.cur_batch = <span class="number">0</span>			<span class="comment"># indicate current batch index of total batches</span></span><br><span class="line">        						<span class="comment"># method for generating label</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># returns an iterator object </span></span><br><span class="line">    <span class="comment"># and is called implicitly called at the beginning of the loop</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># for what use? </span></span><br><span class="line"><span class="comment"># <span class="doctag">TODO:</span> basic python iter impletation</span></span><br><span class="line"><span class="comment"># ANS: need to implement __iter__(), next() for python2, __next__() for python3</span></span><br><span class="line">	<span class="comment"># next method for python3: __next__()</span></span><br><span class="line">    <span class="comment"># the same as the next(self) for python2</span></span><br><span class="line">    <span class="comment"># maybe in that case the code is compatibale with python2 and python3</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__next__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.next()</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">reset</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.cur_batch = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">provide_data</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self._provide_data</span><br><span class="line">    	<span class="comment"># refer to:</span></span><br><span class="line">       	<span class="comment"># self._provide_data = zip(data_names, data_shapes)</span></span><br><span class="line">    </span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">provide_label</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self._provide_label</span><br><span class="line">        <span class="comment"># refer to:</span></span><br><span class="line">    	<span class="comment"># self._provide_label = zip(label_names, label_shapes)</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">next</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> self.cur_batch &lt; self.num_batches:</span><br><span class="line">            self.cur_batch += <span class="number">1</span></span><br><span class="line">            <span class="comment"># provide_data, provide a list of DataDesc object, the i-th item describe the name and shape of data[i]</span></span><br><span class="line">            data = [mx.nd.array(g(d[<span class="number">1</span>])) <span class="keyword">for</span> d, g <span class="keyword">in</span> zip(self._provide_data, 																self.data_gen)]</span><br><span class="line">            label = [mx.nd.array(g(d[<span class="number">1</span>])) <span class="keyword">for</span> d, g <span class="keyword">in</span> zip(self._provide_label, 																 self.label_gen)]</span><br><span class="line">            <span class="keyword">return</span> mx.io.DataBatch(data, label)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">raise</span> StopIteration</span><br></pre></td></tr></table></figure>
+<p><strong>TODO:</strong>  check and compare the code of DataIter for VID in R-FCN</p>
 <blockquote>
-<p>arange, random.rand, random.randint, linspace, ones, zeros, empty, logspace</p>
+<p>A little worried about gf’s IELTS. Since the outcome of listening test tonight is totally catastrophe…</p>
 </blockquote>
-<h5 id="slice">slice</h5>
-<ul>
-<li>
-<p>a[…, i]</p>
-<p>… represent unspecified dim</p>
-</li>
-<li>
-<p>np.split(a, N)</p>
-<p>split a into evenly N parts</p>
-</li>
-<li>
-<p>np.split(a, [])</p>
-<p>split a at certain index</p>
-</li>
-</ul>
-<h5 id="concat">concat</h5>
-<ul>
-<li>np.vstack(a, b)</li>
-<li>np.hstack(a, b)</li>
-<li>np.concatenate(a, b, axis = ?)</li>
-<li>np.stack(a, b)          <strong><em>Note:</em></strong> Stack in a new dimension</li>
-<li>np.fliplr()</li>
-<li>np.flipud()</li>
-</ul>
-<h5 id="basic-math-operation">basic math operation</h5>
-<ul>
-<li>
-<p>np.dot</p>
-<p><strong><em>Note:</em></strong> calculate dot product of two vectors</p>
-</li>
-<li>
-<p>power</p>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> *</span><br><span class="line">a = ndarray</span><br><span class="line">b = ndarray 	<span class="comment"># same size as a</span></span><br><span class="line">a ** b</span><br></pre></td></tr></table></figure>
-<h5 id="random">random</h5>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> python.random <span class="keyword">as</span> random</span><br><span class="line"></span><br><span class="line">random.seed(CERTAIN_NUMBER)</span><br><span class="line">random.random(SHAPE)</span><br><span class="line">random.randint(LOWER, HIGHER, NUMBER)</span><br><span class="line"></span><br><span class="line">b = random.permutation(a)</span><br><span class="line">random.shuffle(a)		<span class="comment"># in-place</span></span><br></pre></td></tr></table></figure>
-<h5 id="useful">useful</h5>
-<ul>
-<li>operation on mask ndarray</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = np.arange(<span class="number">10</span>)</span><br><span class="line">a_g = a &gt; <span class="number">6</span></span><br><span class="line">a_s = a &lt; <span class="number">7</span></span><br><span class="line">a_g + a_s	<span class="comment"># or operand</span></span><br><span class="line">a_g * a_s	<span class="comment"># and operand</span></span><br></pre></td></tr></table></figure>
+<p><em>Nighty night, will resume this work tomorrow.</em></p>
+<p><em>Oh, also need to buy knives for the fist meal. Remember this~</em></p>
 
                 
 
@@ -272,13 +232,9 @@
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2017/12/16/mxnet-notes1/" data-toggle="tooltip" data-placement="top" title="[MXNet] MXNet Notes I: Custom DataIter">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2017/12/11/blog-config-hexo/" data-toggle="tooltip" data-placement="top" title="[Hexo] Foolproof guide for blog config with HEXO">Next Post &rarr;</a>
+                            <a href="/2017/12/11/numpy-manual/" data-toggle="tooltip" data-placement="top" title="[Python] Numpy manual">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -308,7 +264,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#ndarray"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">ndarray</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#basic-operation"><span class="toc-nav-number">1.0.1.</span> <span class="toc-nav-text">basic operation</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#creation"><span class="toc-nav-number">1.0.2.</span> <span class="toc-nav-text">creation</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#slice"><span class="toc-nav-number">1.0.3.</span> <span class="toc-nav-text">slice</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#concat"><span class="toc-nav-number">1.0.4.</span> <span class="toc-nav-text">concat</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#basic-math-operation"><span class="toc-nav-number">1.0.5.</span> <span class="toc-nav-text">basic math operation</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#random"><span class="toc-nav-number">1.0.6.</span> <span class="toc-nav-text">random</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#useful"><span class="toc-nav-number">1.0.7.</span> <span class="toc-nav-text">useful</span></a></li></ol></li></ol></li></ol>
+          <ol class="nav">none</ol>
         
         </div>
       </aside>
@@ -328,9 +284,9 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#Python" title="Python">Python</a>
+                          <a class="tag" href="/tags/#MXNet" title="MXNet">MXNet</a>
                         
-                          <a class="tag" href="/tags/#ML" title="ML">ML</a>
+                          <a class="tag" href="/tags/#Notes" title="Notes">Notes</a>
                         
                     </div>
                 </section>
@@ -350,8 +306,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "your-disqus-ID";
-    var disqus_identifier = "http://yoursite-url/2017/12/11/numpy-manual/";
-    var disqus_url = "http://yoursite-url/2017/12/11/numpy-manual/";
+    var disqus_identifier = "http://yoursite-url/2017/12/16/mxnet-notes1/";
+    var disqus_url = "http://yoursite-url/2017/12/16/mxnet-notes1/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
