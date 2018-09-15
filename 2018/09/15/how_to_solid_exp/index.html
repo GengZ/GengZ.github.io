@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          About - Geng Zhan
+          Novice Blog: naive solid experiment components - Geng Zhan
         
     </title>
 
-    <link rel="canonical" href="http://yoursite-url/about/">
+    <link rel="canonical" href="http://yoursite-url/2018/09/15/how_to_solid_exp/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -69,8 +69,8 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('/img/header_img/home-bg-o.png')
-            /*page*/
+            background-image: url('Demo.png')
+            /*post*/
         
     }
     
@@ -83,10 +83,20 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 
-                    <div class="site-heading">
-                        <h1>About</h1>
-                        <!--<hr class="small">-->
-                        <span class="subheading">My faith is my fate.</span>
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Blog" title="Blog">Blog</a>
+                            
+                              <a class="tag" href="/tags/#Experiment" title="Experiment">Experiment</a>
+                            
+                        </div>
+                        <h1>Novice Blog: naive solid experiment components</h1>
+                        <h2 class="subheading">Gotta build my own lib...</h2>
+                        <span class="meta">
+                            Posted by Geng Zhan on
+                            2018-09-15
+                        </span>
                     </div>
                 
 
@@ -189,224 +199,203 @@
 
 
     <!-- Main Content -->
-    <!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
+    <!-- Modify by Yu-Hsuan Yen -->
 
-<!-- USE SIDEBAR -->
-    <!-- Post Container -->
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+<p>Almost start from scratch every time launch an experiment. Write down a memo for some must-have components when build a new project. Also make a TODO list for my customize lib.</p>
+</blockquote>
+<h1 id="must-have-factors">Must-have factors</h1>
+<hr>
+<h2 id="reproduce">Reproduce</h2>
+<hr>
+<p>Never could make it the most solid experiment…</p>
+<p>Must have:</p>
+<ul>
+<li>A space saves:
+<ul>
+<li>network</li>
+<li>config file</li>
+<li>log file</li>
+<li>Module state &amp; Optimizer state</li>
+</ul>
+</li>
+</ul>
+<p>A few more words:</p>
+<ol>
+<li>
+<p>network file should be a hard copy of defined network</p>
+</li>
+<li>
+<p>config file should be only <strong>one file</strong> where saves all the customized config</p>
+</li>
+<li>
+<p>log file should include all the details of what’s happening in the whole training procedure, e.g. config, peroid loss report, test results.</p>
+<p><strong><em>NOTE:</em></strong> should be a log module for logging and print to stdout, especially for Python 2.x</p>
+</li>
+<li>
+<p>state</p>
+<p>*<em>NOTE:</em> should be a module for state (module and optimizer) saving and reloading</p>
+</li>
+</ol>
+<ul>
+<li>[] logging: print and log</li>
+<li>[] config: detectron fashion</li>
+<li>[] state tool: load and save all states</li>
+</ul>
+<h2 id="monitor">Monitor</h2>
+<hr>
+<p>TensorBoard or Visdom should be used.</p>
+<ul>
+<li>[] TensorBoard fashioned logger</li>
+</ul>
+<h2 id="efficiency">Efficiency</h2>
+<hr>
+<p>Process the data really kills the time…</p>
+<ul>
+<li>[] dataset: from Fast R-CNN</li>
+<li>[] data loader: from Fast R-CNN</li>
+<li>[] pre-process image and related annotation</li>
+</ul>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/05/01/msra_intern_0/" data-toggle="tooltip" data-placement="top" title="[Visiting] 扯扯最近的intern">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
             
-                <h2 id="intern">Intern</h2>
-<blockquote>
-<ul>
-<li>
-<p><em>Research Intern</em> @ <strong>Microsoft Research Asia</strong></p>
-<p>2017.12 ~ now</p>
-<p>Visual Computing Group</p>
-</li>
-<li>
-<p><em>Research Intern</em> @ <strong>SenseTime Beijing</strong></p>
-<p>2017.6 ~ 2017.9</p>
-<p>Tracking &amp; Surveillence Group</p>
-</li>
-</ul>
-</blockquote>
-<h2 id="education">Education</h2>
-<blockquote>
-<ul>
-<li>
-<p>PhD @ <strong>University of Sydney</strong></p>
-<p>2017.9 ~ now</p>
-<p>School of EIE</p>
-</li>
-<li>
-<p>Bachelor @ <strong>Dalian University of Technology</strong></p>
-<p>2013.9 ~ 2017.6</p>
-<p>Major in Electrical Information Engineering</p>
-</li>
-</ul>
-</blockquote>
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
 
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#must-have-factors"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Must-have factors</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#reproduce"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Reproduce</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#monitor"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">Monitor</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#efficiency"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">Efficiency</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
 
-                <!-- 如果开启评论功能 -->
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Blog" title="Blog">Blog</a>
+                        
+                          <a class="tag" href="/tags/#Experiment" title="Experiment">Experiment</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
                 
             </div>
-
-          <!-- Sidebar Container -->
-<div class="
-    col-lg-3 col-lg-offset-0
-    col-md-3 col-md-offset-0
-    col-sm-12
-    col-xs-12
-    sidebar-container
-">
-    
-        <!-- Featured Tags -->
-
-<section>
-    <!-- no hr -->
-    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-    <div class="tags">
-        
-            
-            <a href="/tags/#Hexo" title="Hexo" rel="2">Hexo</a>
-            
-        
-            
-            <a href="/tags/#Blog" title="Blog" rel="4">Blog</a>
-            
-        
-            
-            <a href="/tags/#Experiment" title="Experiment" rel="1">Experiment</a>
-            
-        
-            
-            <a href="/tags/#Lab" title="Lab" rel="1">Lab</a>
-            
-        
-            
-            <a href="/tags/#How to" title="How to" rel="1">How to</a>
-            
-        
-            
-            <a href="/tags/#Visiting" title="Visiting" rel="1">Visiting</a>
-            
-        
-            
-            <a href="/tags/#MXNet" title="MXNet" rel="1">MXNet</a>
-            
-        
-            
-            <a href="/tags/#Notes" title="Notes" rel="1">Notes</a>
-            
-        
-            
-            <a href="/tags/#Python" title="Python" rel="1">Python</a>
-            
-        
-            
-            <a href="/tags/#ML" title="ML" rel="1">ML</a>
-            
-        
+        </div>
     </div>
-</section>
+</article>
 
-        <hr>
-    
-        
-  <h5>RECENT POSTS</h3>
-  <div class="widget">
-    <ul>
-      
-        <li>
-          <a href="/2018/09/15/how_to_solid_exp/">Novice Blog: naive solid experiment components</a>
-        </li>
-      
-        <li>
-          <a href="/2018/05/01/msra_intern_0/">[Visiting] 扯扯最近的intern</a>
-        </li>
-      
-        <li>
-          <a href="/2018/01/16/counting-days-leave/">[Lab] Study off campus</a>
-        </li>
-      
-        <li>
-          <a href="/2017/12/16/mxnet-notes1/">[MXNet] MXNet Notes I: Custom DataIter</a>
-        </li>
-      
-        <li>
-          <a href="/2017/12/11/numpy-manual/">[Python] Numpy manual</a>
-        </li>
-      
-    </ul>
-  </div>
 
-        <hr>
-    
-        
-    <h5>ARCHIVES</h5>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">1</span></li></ul>
-    </div>
 
-        <hr>
-    
-        <!-- Categories -->
 
-        <hr>
-    
-        <!-- Short About -->
-<section class="visible-md visible-lg">
-    <h5><a href="/about/">ABOUT ME</a></h5>
-    <div class="short-about">
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "your-disqus-ID";
+    var disqus_identifier = "http://yoursite-url/2018/09/15/how_to_solid_exp/";
+    var disqus_url = "http://yoursite-url/2018/09/15/how_to_solid_exp/";
 
-        
-            <img id = "avatar_pic" src="/img/me.jpeg" />
-        
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
 
-        
-            <p>Hi, he is Geng. This MS student currently is a pressure chaser in MSRA...</p>
-        
 
-        <!-- SNS Link -->
-        <ul class="list-inline">
-            
-            
-            
 
-            
 
-            
-                <li>
-                    <a target="_blank" href="https://www.facebook.com/Geng Zhan">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-            
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
 
-            
-                <li>
-                    <a target="_blank"  href="https://github.com/GengZ">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-            
-            
-            
-            
-                <li>
-                    <a target="_blank"  href="https://www.linkedin.com/in/战赓">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-            
-        </ul>
-    </div>
-</section>
-        <hr>
-    
-</div>
-
-        
-    </div>
-</div>
 
 
     <!-- Footer -->

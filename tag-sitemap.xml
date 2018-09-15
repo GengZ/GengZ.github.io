@@ -23,13 +23,6 @@
     </url>
 
     <url>
-        <loc>http://yoursite-url/tags/Blog/</loc>
-        <lastmod>2017-12-16T15:58:02.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://yoursite-url/tags/Python/</loc>
         <lastmod>2017-12-18T13:52:35.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -53,6 +46,27 @@
     <url>
         <loc>http://yoursite-url/tags/How-to/</loc>
         <lastmod>2018-01-16T15:49:48.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite-url/tags/Visiting/</loc>
+        <lastmod>2018-05-01T01:39:03.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite-url/tags/Blog/</loc>
+        <lastmod>2018-09-15T08:41:45.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite-url/tags/Experiment/</loc>
+        <lastmod>2018-09-15T08:41:45.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
